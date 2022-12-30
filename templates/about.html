@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Language Translator</title>
+    <link rel="stylesheet" href="/statics/style.css">
+</head>
+<body>
+    <!-- menu bar to change between the page -->
+    <div class="menubar">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('wbcam') }}">Webcam</a>
+        <a href="{{ url_for('upload') }}">Picture Translate</a>
+        <a class="active" href="{{ url_for('about') }}">About</a>
+    </div>
+    <!-- Main content -->
+    <div>
+        <h1>ABOUT Our Project</h1>
+        <embed src="/statics/about.txt" width="100%" height="1000px">
+</div> 
+<!-- scripts -->
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="/statics/script.js"></script>
+
+</body>
+</html>
