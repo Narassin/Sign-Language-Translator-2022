@@ -3,41 +3,37 @@
 <head>
     <title>Sign Language Translator</title>
     <link rel="stylesheet" href="/statics/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"></script>
 </head>
 <body>
     <!-- menu bar to change between the page -->
     <div class="menubar">
-        <a href="{{ url_for('index') }}">Home</a>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
         <a href="{{ url_for('wbcam') }}">Webcam</a>
-        <a class="active" href="{{ url_for('upload') }}">Picture Translate</a>
+        <a href="{{ url_for('upload') }}">Picture Translate</a>
         <a href="{{ url_for('about') }}">About</a>
     </div>
     <!-- Main content -->
     <div>
+        <h1>Welcome to 906D Project</h1>
         <div class="column">
-            <h1>Upload Picture</h1>
-            <div class="wbcam">
-            </div>
+            <h1>Test out our sign language transalator</h1>
             <div align="center">
-                <p>Click on the "Choose File" button to upload a file:</p>
-                <form action="/action_page.php">
-                    <input type="file" id="myFile" name="filename">
-                    <input type="submit">
-                </form>
+                <button>webcam</button>
+                <button>Upload a picture to decipher</button>
             </div>
+            
         </div>
         <div class="column">
-            <h1>Translated</h1>
+            <h1>Nerd Corner</h1>
             <div class="wbcam">
-                
+                <embed src="/statics/intro.txt" width="100%" height="100%">
             </div>
             
         </div>
 </div> 
 <!-- scripts -->
 <script src="https://unpkg.com/feather-icons"></script>
-<script src="/statics/script.js"></script>
+<script src="../statics/script.js"></script>
 
 </body>
 </html>
