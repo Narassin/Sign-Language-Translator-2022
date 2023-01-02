@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+import skimage
 
 # import sys
 
@@ -16,7 +17,7 @@ def calc_glcm_all_agls(img, props, dists=[5], agls=[0, np.pi/4, np.pi/2, 3*np.pi
                         symmetric=sym, 
                         normed=norm)
     feature = []
-    glcm_props = [propery for name in props for propery in graycoprops(glcm, name)[0]]
+    glcm_props = [propery for name in props for propery in skimage.feature.graycoprops(glcm, name)[0]]
     for item in glcm_props:
             feature.append(item)
     
@@ -29,13 +30,16 @@ while True:
     
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
-    h, w = gray.shape
-    ymin, ymax, xmin, xmax = h//3, h*2//3, w//3, w*2//3
-    crop = gray[ymin:ymax, xmin:xmax]
+    # h, w = gray.shape
+    # ymin, ymax, xmin, xmax = h//3, h*2//3, w//3, w*2//3
+    # crop = gray[ymin:ymax, xmin:xmax]
             
-    resize = cv2.resize(crop, (0,0), fx=0.5, fy=0.5)
-    properties = ['dissimilarity', 'correlation', 'homogeneity', 'contrast', 'ASM', 'energy']
-    wrk = calc_glcm_all_agls(resize, props=properties)
+    resize = cv2.resize(gray,(1,24))
+    # properties = ['dissimilarity', 'correlation', 'homogeneity', 'contrast', 'ASM', 'energy']
+    # wrk = calc_glcm_all_agls(resize, props=properties)
+    image_array = np.asarray(resize)
+    
+    image_array = np.reshape(image_array, (24,1))
     
     
     # for (x,y,w,h) in wrk:

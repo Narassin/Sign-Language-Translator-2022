@@ -7,15 +7,16 @@ const predictButton = document.getElementById("predict");
 const clearButton = document.getElementById("clear");
 const numberOfFiles = document.getElementById("number-of-files");
 const fileInput = document.getElementById('file');
-document.write(data)
+
 const predict = async (modelURL) => {
-    if (!model) model = await tf.loadModel(modelURL);
+    if (!model) model = await tf.loadLayersModel(modelURL);
     const files = fileInput.files;
+    
 
     [...files].map(async (img) => {
         const data = new FormData();
         data.append('file', img);
-        document.write(data)
+
         const processedImage = await fetch("/api/prepare",
             {
                 method: 'POST',
@@ -27,9 +28,11 @@ const predict = async (modelURL) => {
             });
 
         // shape has to be the same as it was for training of the model
-        const prediction = model.predict(tf.reshape(processedImage, shape = [1, 24, 64]));
-        const label = prediction.argMax(axis = 1).get([0]);
+        
+        const prediction = model.predict(processedImage.reshape([ 1 ,24, 1]));
+        const label = prediction.argMax(axis = 1).dataSync()[0];
         renderImageLabel(img, label);
+        
     })
 };
 

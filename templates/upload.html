@@ -3,37 +3,34 @@
 <head>
     <title>Sign Language Translator</title>
     <link rel="stylesheet" href="/statics/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
 </head>
 <body>
     <!-- menu bar to change between the page -->
     <div class="menubar">
-        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('index') }}">Home</a>
         <a href="{{ url_for('wbcam') }}">Webcam</a>
-        <a href="{{ url_for('upload') }}">Picture Translate</a>
+        <a class="active" href="{{ url_for('upload') }}">Picture Translate</a>
         <a href="{{ url_for('about') }}">About</a>
     </div>
     <!-- Main content -->
     <div>
-        <h1>Welcome to 906D Project</h1>
-        <div class="column">
-            <h1>Test out our sign language transalator</h1>
-            <div align="center">
-                <button>webcam</button>
-                <button>Upload a picture to decipher</button>
-            </div>
-            
-        </div>
-        <div class="column">
-            <h1>Nerd Corner</h1>
-            <div class="wbcam">
-                <embed src="/statics/intro.txt" width="100%" height="100%">
-            </div>
-            
-        </div>
-</div> 
-<!-- scripts -->
-<script src="https://unpkg.com/feather-icons"></script>
-<script src="../statics/script.js"></script>
+        <h1 class="title">Manual Upload Prediction</h1>
+        <h2 class="title">Upload a gesture Image to translate it</h2>
+        <h5 class="title">( .jpeg .jpg .png )</h5>
+        <main class="file-form">
+            <input type="file" id="file" multiple class="file-form__select-file">
+            <label for="file" class="file-form__select-file_label">Choose Image(s)</label>
+            <button type="submit" class="file-form__button file-form__button_predict" id="predict">Predict</button>
+            <button type="submit" class="file-form__button file-form__button_clear" id="clear">Clear</button>
+            <span class="file-form__files" id="number-of-files"></span>
+        </main>
+        <div id="preview"></div>
+        <script src="/statics/frontend/main.js"></script>
+    </div> 
+    <!-- scripts -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="../statics/script.js"></script>
 
 </body>
 </html>
