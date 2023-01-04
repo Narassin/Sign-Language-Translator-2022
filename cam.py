@@ -23,7 +23,7 @@ from skimage.feature import greycomatrix, graycoprops
     
 #     return feature
 
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 while True:
     ret, frame = video_capture.read()
@@ -33,12 +33,12 @@ while True:
     # ymin, ymax, xmin, xmax = h//3, h*2//3, w//3, w*2//3
     # crop = gray[ymin:ymax, xmin:xmax]
             
-    resize = cv2.resize(frame,(24,1))
+    # resize = cv2.resize(frame,(24,1))
     # properties = ['dissimilarity', 'correlation', 'homogeneity', 'contrast', 'ASM', 'energy']
     # wrk = calc_glcm_all_agls(resize, props=properties)
-    image_array = np.asarray(resize)
+    # image_array = np.asarray(resize)
     
-    image_array = np.reshape(image_array, (24,1))
+    # image_array = np.reshape(image_array, (24,1))
     
     
     # for (x,y,w,h) in wrk:

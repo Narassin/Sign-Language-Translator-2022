@@ -27,15 +27,15 @@
                 </select>
             </div>
             <div class="controls">
-                <button class="btn btn-danger play" title="Play"><i data-feather="play-circle"></i></button>
-                <button class="btn btn-info pause d-none" title="Pause"><i data-feather="pause"></i></button>
-                <button class="btn btn-outline-success screenshot d-none" title="ScreenShot"><i data-feather="image"></i></button>
+                <button id="playbtn" class="btn btn-danger play" title="Play"><i data-feather="play-circle" ></i></button>
+                <button id"pausebtn" class="btn btn-info pause d-none" title="Pause"><i data-feather="pause" ></i></button>
+                <button id="ssbtn" class="btn btn-outline-success screenshot d-none" title="ScreenShot" ><i data-feather="image"></i></button>
             </div>
         </div>
         <div class="column">
             <h1>Translated</h1>
             <div class="wbcam">
-                <embed src="translate.txt" width="100%" height="100%">
+                <div id="wTranslate"></div>
             </div>
             
         </div>
@@ -43,6 +43,8 @@
 <!-- scripts -->
 <script src="https://unpkg.com/feather-icons"></script>
 <script src="../statics/script.js"></script>
+<script src="../statics/frontend/realtime.js"></script>
+
 
 </body>
 </html>

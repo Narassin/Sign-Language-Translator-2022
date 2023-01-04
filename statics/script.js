@@ -1,6 +1,7 @@
+// Webcam Selector Script
 feather.replace();
 
-const video = document.querySelector("#videoElement");
+const video = document.getElementById("videoElement");
 const controls = document.querySelector('.controls');
 const cameraOptions = document.querySelector('.video-options>select');
 const canvas = document.querySelector('canvas');
@@ -8,7 +9,9 @@ const screenshotImage = document.querySelector('img');
 const buttons = [...controls.querySelectorAll('button')];
 let streamStarted = false;
 
-const [play, pause, screenshot] = buttons;
+const play = document.getElementById('playbtn');
+const pause = document.getElementById('pausebtn');
+const screenshot = document.getElementById('ssbtn');
 
 const constraints = {
   video: {
@@ -22,12 +25,14 @@ const constraints = {
       ideal: 1080,
       max: 1440
     },
-  }
+    
+  },
+  audio:false
 };
 
 
 if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
+  navigator.mediaDevices.getUserMedia({ video: true})
   .then(function (stream) {
       video.srcObject = stream;
     })
@@ -46,6 +51,8 @@ const getCameraSelection = async () => {
   });
   cameraOptions.innerHTML = options.join('');
 };
+
+
 
 play.onclick = () => {
   if (streamStarted) {

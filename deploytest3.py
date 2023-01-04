@@ -92,17 +92,6 @@ def preprocessing(file):
     
     return res
 
-
-
-#------LOAD MODEL------------
-# def model_load():
-#     #Serve the TensorFlow.js model from the 'tensorflowjs_model' directory
-    
-#     global model
-#     model = tf.loadLayersModel('/Model','model.json')
-#     print("Tensoflow model loaded successfully")
-
-
     
 #==============Run the flask application to run a server==================    
 if __name__ == "__main__":
