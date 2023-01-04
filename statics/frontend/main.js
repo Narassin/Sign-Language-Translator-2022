@@ -7,6 +7,7 @@ const predictButton = document.getElementById("predict");
 const clearButton = document.getElementById("clear");
 const numberOfFiles = document.getElementById("number-of-files");
 const fileInput = document.getElementById('file');
+const alpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y",'Z'," "]
 
 const predict = async (modelURL) => {
     if (!model) model = await tf.loadLayersModel(modelURL);
@@ -31,7 +32,8 @@ const predict = async (modelURL) => {
         
         const prediction = model.predict(processedImage.reshape([ 1 ,24, 1]));
         const label = prediction.argMax(axis = 1).dataSync()[0];
-        renderImageLabel(img, label);
+        const tag = alpha[label-1]
+        renderImageLabel(img, tag);
         
     })
 };

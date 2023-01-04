@@ -71,6 +71,7 @@ def preprocessing(file):
     res = cv2.resize(img, dsize=(24, 1), interpolation=cv2.INTER_CUBIC)
     # file.save("static/UPLOAD/img.png") # saving uploaded img
     # cv2.imwrite("static/UPLOAD/test.png", res) # saving processed image
+    
     return res
 
 
