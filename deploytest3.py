@@ -5,6 +5,7 @@ import json
 import cv2
 import numpy as np
 import io
+from skimage.feature import greycomatrix, greycoprops
 
 
 
@@ -47,8 +48,7 @@ def about():
 def prepare():
     file = request.files['file']
     res = preprocessing(file)
-    print(res)
-    return json.dumps({"image": res.tolist()})
+    return json.dumps({"image": res})
 
 #---------------Load Model--------------------
 @app.route('/model')
@@ -63,12 +63,30 @@ def load_shards(path):
 
 
 # ------------- Pre Processing -------------------------------------------
+def calc_glcm_all_agls(img, props, dists=[5], agls=[0, np.pi/4, np.pi/2, 3*np.pi/4], lvl=256, sym=True, norm=True):
+    
+    glcm = greycomatrix(img, 
+                        distances=dists, 
+                        angles=agls, 
+                        levels=lvl,
+                        symmetric=sym, 
+                        normed=norm)
+    feature = []
+    glcm_props = [propery for name in props for propery in greycoprops(glcm, name)[0]]
+    for item in glcm_props:
+            feature.append(item)
+    df = feature
+    return df
+
 def preprocessing(file):
     in_memory_file = io.BytesIO()
     file.save(in_memory_file)
     data = np.frombuffer(in_memory_file.getvalue(), dtype=np.uint8)
     img = cv2.imdecode(data, 0)
-    res = cv2.resize(img, dsize=(24, 1), interpolation=cv2.INTER_CUBIC)
+    properties = ['dissimilarity', 'correlation', 'homogeneity', 'contrast', 'ASM', 'energy']
+    resize = cv2.resize(img, dsize=(128, 128), interpolation=cv2.INTER_CUBIC)
+    
+    res = calc_glcm_all_agls(resize,props=properties)
     # file.save("static/UPLOAD/img.png") # saving uploaded img
     # cv2.imwrite("static/UPLOAD/test.png", res) # saving processed image
     

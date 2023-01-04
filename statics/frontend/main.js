@@ -25,7 +25,7 @@ const predict = async (modelURL) => {
             }).then(response => {
                 return response.json();
             }).then(result => {
-                return tf.tensor2d(result['image']);
+                return tf.tensor2d(result['image'],[24,1],"float32");
             });
 
         // shape has to be the same as it was for training of the model
