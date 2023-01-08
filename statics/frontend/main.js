@@ -12,6 +12,7 @@ const alpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","
 const predict = async (modelURL) => {
     if (!model) model = await tf.loadLayersModel(modelURL);
     const files = fileInput.files;
+    console.log(files);
     
 
     [...files].map(async (img) => {
@@ -29,7 +30,7 @@ const predict = async (modelURL) => {
             });
 
         // shape has to be the same as it was for training of the model
-        
+        console.log(typeof(processedImage));
         const prediction = model.predict(processedImage.reshape([ 1 ,24, 1]));
         const label = prediction.argMax(axis = 1).dataSync()[0];
         const tag = alpha[label-1]
