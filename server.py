@@ -1,3 +1,9 @@
+#Project Sign Language Translator (Server Side)
+#Version 1.3
+#9/1/2023
+#Coded by: Ahmad Nuruddin Muksalmina (Narassin)
+#This server is only meant for development and not meant to be use in production (in other words need to swap flask with docker or something)
+
 # Import Depenency
 from flask_cors import CORS
 from flask import Flask, request, render_template, json, jsonify, send_from_directory
@@ -6,54 +12,39 @@ import cv2
 import numpy as np
 import io
 from skimage.feature import greycomatrix, greycoprops
-import requests
 
 #Creating WSGI Instance 
 app = Flask (__name__,template_folder='templates',static_folder='statics')
 CORS(app)
 
 #  ==========@APP.ROUTE===============
-
-
-#------------main interface---------------
+#------------home page--------------
 @app.route("/" )
 def index():
     return render_template('index.html')
 
-@app.route("/realtime", methods=['GET','POST'])
-def wbcam():
-    return render_template('wbcam.html')
+#------------fingerspell-----------------
+@app.route("/dict")
+def dict():
+     return render_template('dict.html')
 
+#-----------upload----------------------
 @app.route("/upload",methods=["GET"])
 def upload():
     return render_template('upload.html')
 
+#-------------about----------------------
 @app.route("/about")
 def about():
     return render_template('about.html')
 
-# ---------------prepare-----------------
+# --------api prepare for preprocessing----
 @app.route("/api/prepare", methods=["POST"])
 def prepare():
     file = request.files['file']
     print("file received")
     res = preprocessing(file)
     return json.dumps({"image": res})
-
-@app.route("/api/rtprep", methods=["POST"])
-def prep():
-    file = request.files.get('file')
-    print(file)
-    if file:
-        # Read the contents of the file into memory
-        file_data = file.read()
-        print(file_data)
-        # Pass the file data to the preprocessing function
-        res = preprocessing(file_data)
-        return json.dumps({"image": res})
-    else:
-        print('error')
-        return json.dumps({"error": "No file was uploaded"})
     
 #---------------Load Model--------------------
 @app.route('/model')
@@ -66,11 +57,8 @@ def model():
 def load_shards(path):
     return send_from_directory('model_js', path)
 
-
-
-
-# ------------- Pre Processing -------------------------------------------
-#Extracting the GLCM
+#===============================Function Modules===============================
+#------------------------------Extracting the GLCM---------------------------
 def calc_glcm_all_agls(img, props, dists=[5], agls=[0, np.pi/4, np.pi/2, 3*np.pi/4], lvl=256, sym=True, norm=True):
     
     glcm = greycomatrix(img, 
@@ -86,6 +74,7 @@ def calc_glcm_all_agls(img, props, dists=[5], agls=[0, np.pi/4, np.pi/2, 3*np.pi
     df = feature
     return df
 
+#------------------------Preprocessing GLCM------------------------------------
 def preprocessing(file):
     in_memory_file = io.BytesIO()
     file.save(in_memory_file)
@@ -98,9 +87,7 @@ def preprocessing(file):
     
     return res
 
-    
-    
-    
+
 #==============Run the flask application to run a server==================    
 if __name__ == "__main__":
     app.run()
