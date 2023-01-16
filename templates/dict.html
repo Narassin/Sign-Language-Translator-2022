@@ -1,0 +1,337 @@
+<!--
+Project Sign Language Translator (FingerSpelling)
+Version 1.0
+10/1/2023
+Coded by: Ahmad Nuruddin Muksalmina (Narassin)
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/statics/style.css">
+    <link rel="icon" type="image/x-icon" href="/statics/hand.ico">
+</head>
+
+<body>
+    <!-- Navigation bar (hidden by default) -->
+    <div id="NLinks" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i data-feather="x"></i></a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('upload') }}">Translate</a>
+        <a href="{{ url_for('dict') }}">Fingerspell</a>
+        <a href="{{ url_for('about') }}">About</a>
+    </div>
+    <div class="shadow_opacity" id="shadow_opacity"></div>
+    <div class="top-bar">
+        <a href="javascript:void(0);" onclick="openNav()">
+            <image class="fa fa-bars" src="../statics/pic/hand.png"></image>
+        </a>
+    </div>
+    <!-- Banner -->
+    <div class="banner">
+        <h1 class="subtitle">FingerSpelling</h1>
+    </div>
+
+    <!-- Create a gallery of the sign alphabet using the img tag -->
+    <div class="sign-alphabet-gallery">
+        <a href="javascript:void(0);" onclick="showA()" id="A Sign"><img src="../statics/sign/A.png" class="sign-img"
+                alt="A Sign"></a>
+        <a href="javascript:void(0);" onclick="showB()" id="B Sign"><img src="../statics/sign/B.png" class="sign-img"
+                alt="B Sign"></a>
+        <a href="javascript:void(0);" onclick="showC()" id="C Sign"><img src="../statics/sign/C.png" class="sign-img"
+                alt="C Sign"></a>
+        <a href="javascript:void(0);" onclick="showD()" id="D Sign"><img src="../statics/sign/D.png" class="sign-img"
+                alt="D Sign"></a>
+        <a href="javascript:void(0);" onclick="showE()" id="E Sign"><img src="../statics/sign/E.png" class="sign-img"
+                alt="E Sign"></a>
+        <a href="javascript:void(0);" onclick="showF()" id="F Sign"><img src="../statics/sign/F.png" class="sign-img"
+                alt="F Sign"></a>
+        <a href="javascript:void(0);" onclick="showG()" id="G Sign"><img src="../statics/sign/G.png" class="sign-img"
+                alt="G Sign"></a>
+        <a href="javascript:void(0);" onclick="showH()" id="H Sign"><img src="../statics/sign/H.png" class="sign-img"
+                alt="H Sign"></a>
+        <a href="javascript:void(0);" onclick="showI()" id="I Sign"><img src="../statics/sign/I.png" class="sign-img"
+                alt="I Sign"></a>
+        <a href="javascript:void(0);" onclick="showJ()" id="J Sign"><img src="../statics/sign/J.png" class="sign-img"
+                alt="J Sign"></a>
+        <a href="javascript:void(0);" onclick="showK()" id="K Sign"><img src="../statics/sign/K.png" class="sign-img"
+                alt="K Sign"></a>
+        <a href="javascript:void(0);" onclick="showL()" id="L Sign"><img src="../statics/sign/L.png" class="sign-img"
+                alt="L Sign"></a>
+        <a href="javascript:void(0);" onclick="showM()" id="M Sign"><img src="../statics/sign/M.png" class="sign-img"
+                alt="M Sign"></a>
+        <a href="javascript:void(0);" onclick="showN()" id="N Sign"><img src="../statics/sign/N.png" class="sign-img"
+                alt="N Sign"></a>
+        <a href="javascript:void(0);" onclick="showO()" id="O Sign"><img src="../statics/sign/O.png" class="sign-img"
+                alt="O Sign"></a>
+        <a href="javascript:void(0);" onclick="showP()" id="P Sign"><img src="../statics/sign/P.png" class="sign-img"
+                alt="P Sign"></a>
+        <a href="javascript:void(0);" onclick="showQ()" id="Q Sign"><img src="../statics/sign/Q.png" class="sign-img"
+                alt="Q Sign"></a>
+        <a href="javascript:void(0);" onclick="showR()" id="R Sign"><img src="../statics/sign/R.png" class="sign-img"
+                alt="R Sign"></a>
+        <a href="javascript:void(0);" onclick="showS()" id="S Sign"><img src="../statics/sign/S.png" class="sign-img"
+                alt="S Sign"></a>
+        <a href="javascript:void(0);" onclick="showT()" id="T Sign"><img src="../statics/sign/T.png" class="sign-img"
+                alt="T Sign"></a>
+        <a href="javascript:void(0);" onclick="showU()" id="U Sign"><img src="../statics/sign/U.png" class="sign-img"
+                alt="U Sign"></a>
+        <a href="javascript:void(0);" onclick="showV()" id="V Sign"><img src="../statics/sign/V.png" class="sign-img"
+                alt="V Sign"></a>
+        <a href="javascript:void(0);" onclick="showW()" id="W Sign"><img src="../statics/sign/W.png" class="sign-img"
+                alt="W Sign"></a>
+        <a href="javascript:void(0);" onclick="showX()" id="X Sign"><img src="../statics/sign/X.png" class="sign-img"
+                alt="X Sign"></a>
+        <a href="javascript:void(0);" onclick="showY()" id="Y Sign"><img src="../statics/sign/Y.png" class="sign-img"
+                alt="Y Sign"></a>
+        <a href="javascript:void(0);" onclick="showZ()" id="Z Sign"><img src="../statics/sign/Z.png" class="sign-img"
+                alt="Z Sign"></a>
+    </div>
+
+    <!-- Create a container for the gif and image of the finger spelling for a specific sign -->
+    <div class="sign-container" id="Modal A" style="display:none;">
+        <span class="close" id="close" onclick="closeA();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/A.gif" alt="A Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/A.png" alt="A Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal B" style="display:none;">
+        <span class="close" id="close" onclick="closeB();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/B.gif" alt="B Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/B.png" alt="B Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal C" style="display:none;">
+        <span class="close" id="close" onclick="closeC();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/C.gif" alt="C Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/C.png" alt="C Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal D" style="display:none;">
+        <span class="close" id="close" onclick="closeD();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/D.gif" alt="D Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/D.png" alt="D Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal E" style="display:none;">
+        <span class="close" id="close" onclick="closeE();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/E.gif" alt="E Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/E.png" alt="E Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal F" style="display:none;">
+        <span class="close" id="close" onclick="closeF();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/F.gif" alt="F Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/F.png" alt="F Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal G" style="display:none;">
+        <span class="close" id="close" onclick="closeG();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/G.gif" alt="G Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/G.png" alt="G Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal H" style="display:none;">
+        <span class="close" id="close" onclick="closeH();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/H.gif" alt="H Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/H.png" alt="H Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal I" style="display:none;">
+        <span class="close" id="close" onclick="closeI();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/I.gif" alt="I Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/I.png" alt="I Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal J" style="display:none;">
+        <span class="close" id="close" onclick="closeJ();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/J.gif" alt="J Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/J.png" alt="J Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal K" style="display:none;">
+        <span class="close" id="close" onclick="closeK();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/K.gif" alt="K Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/K.png" alt="K Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal L" style="display:none;">
+        <span class="close" id="close" onclick="closeL();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/L.gif" alt="L Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/L.png" alt="L Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal M" style="display:none;">
+        <span class="close" id="close" onclick="closeM();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/M.gif" alt="M Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/M.png" alt="M Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal N" style="display:none;">
+        <span class="close" id="close" onclick="closeN();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/N.gif" alt="N Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/N.png" alt="N Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal O" style="display:none;">
+        <span class="close" id="close" onclick="closeO();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/O.gif" alt="O Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/O.png" alt="O Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal P" style="display:none;">
+        <span class="close" id="close" onclick="closeP();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/P.gif" alt="P Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/P.png" alt="P Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal Q" style="display:none;">
+        <span class="close" id="close" onclick="closeQ();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/Q.gif" alt="Q Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/Q.png" alt="Q Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal R" style="display:none;">
+        <span class="close" id="close" onclick="closeR();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/R.gif" alt="R Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/R.png" alt="R Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal S" style="display:none;">
+        <span class="close" id="close" onclick="closeS();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/S.gif" alt="S Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/S.png" alt="S Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal T" style="display:none;">
+        <span class="close" id="close" onclick="closeT();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/T.gif" alt="T Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/T.png" alt="T Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal U" style="display:none;">
+        <span class="close" id="close" onclick="closeU();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/U.gif" alt="U Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/U.png" alt="U Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal V" style="display:none;">
+        <span class="close" id="close" onclick="closeV();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/V.gif" alt="V Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/V.png" alt="V Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal W" style="display:none;">
+        <span class="close" id="close" onclick="closeW();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/W.gif" alt="W Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/W.png" alt="W Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal X" style="display:none;">
+        <span class="close" id="close" onclick="closeX();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/X.gif" alt="X Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/X.png" alt="X Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal Y" style="display:none;">
+        <span class="close" id="close" onclick="closeY();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/Y.gif" alt="Y Sign Gif" class="sign-alphabet-gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/Y.png" alt="Y Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <div class="sign-container" id="Modal Z" style="display:none;">
+        <span class="close" id="close" onclick="closeZ();">&times;</span>
+        <div class="sign-div">
+            <img src="../statics/sign/Z.gif" alt="Z Sign Gif">
+        </div>
+        <div class="sign-div">
+            <img src="../statics/sign/Z.png" alt="Z Sign Finger Spelling" class="sign-alphabet-fingerspell">
+        </div>
+    </div>
+    <!-- Add more containers for the rest of the sign alphabet -->
+
+    <!-- scripts -->
+    <script src="../statics/frontend/main.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>
