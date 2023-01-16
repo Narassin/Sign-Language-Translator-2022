@@ -1,25 +1,69 @@
+<!--
+Project Sign Language Translator (About)
+Version 1.0
+6/1/2023
+Coded by: Ahmad Nuruddin Muksalmina (Narassin)
+-->
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Sign Language Translator</title>
+    <link rel="icon" type="image/x-icon" href="/statics/hand.ico">
     <link rel="stylesheet" href="/statics/style.css">
 </head>
-<body>
-    <!-- menu bar to change between the page -->
-    <div class="menubar">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('wbcam') }}">Webcam</a>
-        <a href="{{ url_for('upload') }}">Picture Translate</a>
-        <a class="active" href="{{ url_for('about') }}">About</a>
-    </div>
-    <!-- Main content -->
-    <div>
-        <h1>ABOUT Our Project</h1>
-        <embed src="/statics/about.txt" width="100%" height="1000px">
-</div> 
-<!-- scripts -->
-<script src="https://unpkg.com/feather-icons"></script>
-<script src="/statics/script.js"></script>
 
+<body>
+    <!-- Navigation bar (hidden by default) -->
+    <div id="NLinks" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i data-feather="x"></i></a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('upload') }}">Translate</a>
+        <a href="{{ url_for('dict') }}">Fingerspell</a>
+        <a href="{{ url_for('about') }}">About</a>
+    </div>
+    <div class="shadow_opacity" id="shadow_opacity"></div>
+    <div class="top-bar">
+        <a href="javascript:void(0);" onclick="openNav()">
+            <image class="fa fa-bars" src="../statics/pic/hand.png"></image>
+        </a>
+    </div>
+
+    <!-- Title -->
+    <div class="banner">
+        <h1>ABOUT Our Project</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="about">
+        The goal of this project is to create a system that can accurately translate sign language gestures into written
+        or spoken language, in order to facilitate communication between individuals who use sign language and those who
+        do not.
+        <br>
+        To achieve this goal, we are using a combination of two different types of machine learning models: Gray-Level
+        Co-Occurrence Matrix (GLCM) and Convolutional Neural Network (CNN).
+        <br>
+        GLCM is a technique that allows us to analyze the texture of an image and extract features that can be used for
+        classification tasks. This is useful for our project because it allows us to analyze the different shapes and
+        patterns formed by the hands and fingers in different sign language gestures.
+        <br>
+        CNN, on the other hand, is a type of deep learning model that is particularly well-suited for image recognition
+        tasks. By training a CNN on a large dataset of sign language gestures, we can teach the model to recognize and
+        classify different gestures with a high degree of accuracy.
+        <br>
+        We are using a website to deploy our model and make inferences because it allows us to make our system easily
+        accessible to a wide audience. With just a few clicks, users can upload an image or video of a sign language
+        gesture and receive a translation in real-time. This allows for seamless communication between individuals
+        regardless of their preferred mode of communication.
+        <br>
+        Overall, our Sign Language Translator project aims to break down barriers and facilitate communication between
+        individuals from all walks of life. Thank you for visiting our website and we hope that our system will be able
+        to help you or someone you know in the future.
+    </div>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="../statics/frontend/main.js"></script>
 </body>
+
 </html>
